@@ -38,19 +38,9 @@ app.use(function(req,res,next){
 app.get("/",function(req,res){
     res.render("home");
 })
-app.get("/games",function(req,res){
-    Game.find({},(function(err,games){
-        if(err){
-            console.log("error");
-        }
-        else{
-            res.render("game",{data:games});
-        }
-    })
-    )
-});
 app.use(indexRoutes);
 app.use("/games",gamesRoutes);
 app.use("/games/:id/comments",commentRoutes);
 
-app.listen(process.env.PORT);
+let port = process.env.PORT||3000;
+app.listen(port);
