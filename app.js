@@ -38,7 +38,7 @@ app.use(function(req,res,next){
 app.get("/",function(req,res){
     res.render("home");
 })
-app.get("/",function(req,res){
+app.get("/games",function(req,res){
     Game.find({},(function(err,games){
         if(err){
             console.log("error");
