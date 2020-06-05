@@ -42,6 +42,6 @@ app.use(indexRoutes);
 app.use("/games",gamesRoutes);
 app.use("/games/:id/comments",commentRoutes);
 
-app.listen(3300,function(err){
+app.listen(process.env.PORT,function(err){
     console.log("server");
 })
