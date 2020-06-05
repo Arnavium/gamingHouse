@@ -2,17 +2,17 @@ var express = require("express");
 var router = express.Router();
 var Game = require("../models/game");
 var middleware = require("../middleware/index");
-router.get("/",function(req,res){
-    Game.find({},(function(err,games){
-        if(err){
-            console.log("error");
-        }
-        else{
-            res.render("game",{data:games});
-        }
-    })
-    )
-});
+// router.get("/",function(req,res){
+//     Game.find({},(function(err,games){
+//         if(err){
+//             console.log("error");
+//         }
+//         else{
+//             res.render("game",{data:games});
+//         }
+//     })
+//     )
+// });
 
 router.post("/",middleware.isLoggedin,function(req,res){
     var name=req.body.name,

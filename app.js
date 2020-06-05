@@ -7,8 +7,8 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var flash = require("connect-flash");
 var methodOverride = require("method-override");
-mongoose.connect("mongodb://localhost:27017/v1",{useNewUrlParser:true,useUnifiedTopology: true,useFindAndModify: false});
-//mongoose.connect("mongodb+srv://Arnav:Arnav2000@cluster0-0eldl.mongodb.net/gH?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology: true,useFindAndModify: false});
+//mongoose.connect("mongodb://localhost:27017/v1",{useNewUrlParser:true,useUnifiedTopology: true,useFindAndModify: false});
+mongoose.connect("mongodb+srv://Arnav:Arnav2000@cluster0-0eldl.mongodb.net/gH?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology: true,useFindAndModify: false});
 app.use(bodyParser.urlencoded({extended:true}));
 var Game = require("./models/game");
 var User = require("./models/user");
@@ -38,10 +38,19 @@ app.use(function(req,res,next){
 app.get("/",function(req,res){
     res.render("home");
 })
+app.get("/",function(req,res){
+    Game.find({},(function(err,games){
+        if(err){
+            console.log("error");
+        }
+        else{
+            res.render("game",{data:games});
+        }
+    })
+    )
+});
 app.use(indexRoutes);
 app.use("/games",gamesRoutes);
 app.use("/games/:id/comments",commentRoutes);
 
-app.listen(process.env.PORT,function(err){
-    console.log("server");
-})
+app.listen(process.env.PORT);
